@@ -1,0 +1,42 @@
+[
+  {
+    "rule_id": "PC001",
+    "rule_name": "SQLExec Without Bind Variables",
+    "severity": "high",
+    "pattern": "SQLExec\\s*\\(\\s*\"[^\"]*(?:\\|\\||\\+)[^\"]*\"",
+    "description": "Flags SQLExec statements that appear to build SQL by concatenating values.",
+    "is_regex": true
+  },
+  {
+    "rule_id": "PC002",
+    "rule_name": "MessageBox In Runtime Code",
+    "severity": "medium",
+    "pattern": "MessageBox\\s*\\(",
+    "description": "Interactive popups are often left behind in application code.",
+    "is_regex": true
+  },
+  {
+    "rule_id": "PC003",
+    "rule_name": "CommitWork Usage",
+    "severity": "high",
+    "pattern": "CommitWork\\s*\\(",
+    "description": "Direct transaction control in PeopleCode can cause commit scope problems.",
+    "is_regex": true
+  },
+  {
+    "rule_id": "PC004",
+    "rule_name": "Error Function Usage",
+    "severity": "medium",
+    "pattern": "Error\\s*\\(",
+    "description": "Error() should be reviewed to confirm the user experience and rollback behavior are intended.",
+    "is_regex": true
+  },
+  {
+    "rule_id": "PC005",
+    "rule_name": "Hardcoded Operator Id",
+    "severity": "high",
+    "pattern": "[\"'](?:PS|VP|SYSADM)[A-Z0-9_]*[\"']",
+    "description": "Hardcoded user ids or privileged accounts should be avoided.",
+    "is_regex": true
+  }
+]
