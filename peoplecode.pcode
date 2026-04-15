@@ -1,0 +1,19 @@
+Local string &pythonExe = "C:\Python312\python.exe";
+Local string &scriptPath = "D:\office_code_review\peoplecode_review.py";
+Local string &outputPath = "D:\office_code_review\review_results.csv";
+Local string &connStr = "Driver={ODBC Driver 17 for SQL Server};Server=sqlhost;Database=HR92DMO;UID=USER;PWD=PASSWORD;";
+Local string &command;
+Local number &processId;
+
+/* Double quotes inside the command must be doubled in PeopleCode strings. */
+&command = Char(34) | &pythonExe | Char(34) | " " |
+           Char(34) | &scriptPath | Char(34) | " " |
+           Char(34) | &connStr | Char(34) | " " |
+           "--rules " | Char(34) | "D:\office_code_review\rules\review_rules.json" | Char(34) | " " |
+           "--output " | Char(34) | &outputPath | Char(34) | " " |
+           "--fail-on-severity high";
+
+/* Run synchronously and use an absolute path so PS_HOME is not prefixed. */
+&processId = Exec(&command, %Exec_Synchronous + %FilePath_Absolute);
+
+MessageBox(0, "", 0, 0, "Python review finished. Process Id: " | &processId);
